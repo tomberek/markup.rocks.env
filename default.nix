@@ -9,6 +9,7 @@ let overrideCabal = drv: f: (drv.override (args: args // {
         reflex = self.callPackage ./reflex {};
         reflex-dom = self.callPackage ./reflex-dom {};
         reflex-todomvc = self.callPackage ./reflex-todomvc {};
+        my-pandoc = self.callPackage ./my-pandoc {};
         active = overrideCabal super.active (drv: {
           version = "0.1.0.19";
           sha256 = "1zzzrjpfwxzf0zbz8vcnpfqi7djvrfxglhkvw1s6yj5gcblg2rcw";

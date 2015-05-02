@@ -1,12 +1,15 @@
 [submodule "nixpkgs"]
 	path = nixpkgs
-	url = ../nixpkgs
+	url = git@github.com:ryantrinkle/nixpkgs
 [submodule "reflex"]
 	path = reflex
-	url = ../reflex
+	url = git@github.com:ryantrinkle/reflex
 [submodule "reflex-dom"]
 	path = reflex-dom
-	url = ../reflex-dom
+	url = git@github.com:ryantrinkle/reflex-dom
 [submodule "reflex-todomvc"]
 	path = reflex-todomvc
-	url = ../reflex-todomvc
+	url = git@github.com:ryantrinkle/reflex-todomvc
+[submodule "my-pandoc"]
+	path = my-pandoc
+	url = git@github.com:osener/pandoc.git
