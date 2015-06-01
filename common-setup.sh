@@ -63,7 +63,8 @@ if ! type -P git >/dev/null ; then
   exit 1
 fi
 
-for x in nixpkgs reflex reflex-dom reflex-todomvc my-pandoc ; do
+
+for x in reflex reflex-dom reflex-todomvc my-pandoc ; do
   if [ ! "$(ls -A "$x")" ] ; then
 
     git submodule update --init --recursive "$x"
