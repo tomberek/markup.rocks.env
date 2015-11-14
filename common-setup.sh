@@ -53,22 +53,22 @@ if [ "$(nix-instantiate --eval --expr "builtins.compareVersions builtins.nixVers
   exit 1
 fi
 
-(
+git_thunk() {
+    echo "import ((import <nixpkgs> {}).fetchgit (import ./git.nix))"
+}
 
-cd "$DIR"
+git_manifest() {
+    local REPO="$1"
 
+    local URL="$(git -C "$REPO" config --get remote.origin.url | sed 's_^git@github.com:_git://github.com/_')" # Don't use git@github.com origins, since these can't be accessed by nix
+    local REV="$(git -C "$REPO" rev-parse HEAD)"
+    local HASH="$($(nix-build -E "(import <nixpkgs> {}).nix-prefetch-scripts")/bin/nix-prefetch-git "$PWD/$REPO" "$REV" 2>/dev/null | tail -n 1)"
 
-if ! type -P git >/dev/null ; then
-  echo "Please make sure that 'git' is installed and can be run from this shell"
-  exit 1
-fi
-
-
-for x in reflex reflex-dom reflex-todomvc my-pandoc ; do
-  if [ ! "$(ls -A "$x")" ] ; then
-
-    git submodule update --init --recursive "$x"
-  fi
-done
-
-)
+    cat <<EOF
+{
+  url = $URL;
+  rev = "$REV";
+  sha256 = "$HASH";
+}
+EOF
+}

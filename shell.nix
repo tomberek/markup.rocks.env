@@ -9,5 +9,7 @@ in this.nixpkgs.runCommand "shell" {
     this.nixpkgs.nodejs
     this.nixpkgs.curl
     this.ghc.cabal-install
+    this.ghc.ghcid
+    this.ghc.cabal2nix
   ] ++ builtins.map reflexEnv this.platforms;
 } ""
